@@ -14,14 +14,14 @@ bool result = (int.TryParse(znak, out int num));
 int first = 0;
 int last = 0;
 int i = 1;
-if (result == true)         
+if (result == true && num > 0)         
 {
 
     while (x1 > i)
     {
         first = (int)((num / Math.Pow(10, (x1 - i))) % 10);
         last = num % 10;
-        WriteL($"{first}");
+        Write($"{first}");
         WriteL($"{last}");
         x1 = x1 - 1;
         i++;
