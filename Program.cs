@@ -1,42 +1,53 @@
-﻿void Write(string message)
-{
-    Console.Write(message);
-}
-void WriteL(string message)
-{
-    Console.WriteLine(message);
-}
+﻿
+// Задача 19
 
-Write("Вводим число: ");
-string? znak = Console.ReadLine();
-int x1 = znak.Length;
-bool result = (int.TryParse(znak, out int num));
-int first = 0;
-int last = 0;
-int i = 1;
-if (result == true && num > 0)         
-{
+// Напишите программу, которая принимает на вход пятизначное число и проверяет, является ли оно палиндромом.
 
-    while (x1 > i)
+// 14212 -> нет
+
+// 12821 -> да
+
+// 23432 -> да
+
+int InputInt(string value)
+{
+    int number = 0;
+    while (!int.TryParse(value, out number))
     {
-        first = (int)((num / Math.Pow(10, (x1 - i))) % 10);
-        last = num % 10;
-        Write($"{first}");
-        WriteL($"{last}");
-        x1 = x1 - 1;
+        Console.Write("Не подходит к требованиЮ введите число: ");
+        value = Console.ReadLine();
+    }
+    return number;
+}
+void Palindrom(int first, int dlinaNum, int num)
+{
+    int i = 1;
+    while (dlinaNum > i)
+    {
+        first = (int)((num / Math.Pow(10, (dlinaNum - i))) % 10);
+        int last = num % 10;
+        Console.Write($"{first}");
+        Console.WriteLine($"{last}");
+        dlinaNum = dlinaNum - 1;
         i++;
         num = num / 10;
-        if(first==last);
-        else
+        if (first != last)
         {
-            WriteL("не палиндром");
-            return;
+            Console.WriteLine("не палиндром");
+            return; 
         }
-
     }
-     WriteL("Палиндром");
-
-
-
+    Console.WriteLine("Палиндром");
 }
-else WriteL($"не подходит по требованиям");
+Console.Write("Введите пятизначное число: ");
+int num = InputInt(Console.ReadLine());
+int first = 0;
+string x = Convert.ToString(num);
+int dlinaNum = x.Length;
+int i = 1;
+if (num > 9)
+{
+    Palindrom(first, dlinaNum, num);
+}
+else Console.WriteLine($"не подходит по требованиям");
+
