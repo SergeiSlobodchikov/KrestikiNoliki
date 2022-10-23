@@ -74,11 +74,6 @@ void Coordinate(ref int x, ref int y)
     x = Convert.ToInt32(splitString2[0]);
     y = Convert.ToInt32(splitString2[1]);
 }
-int schet = 1;
-int str = 0;
-int column = 0;
-char krestik = 'x';
-char nolik = 'o';
 
 void proverka(char[,] field)
 {
@@ -237,6 +232,11 @@ void pobeda(char[,] field, ref int schet)
 
 }
 
+int schet = 1;
+int str = 0;
+int column = 0;
+char krestik = 'x';
+char nolik = 'o';
 
 for (int i = 1; i < 9; i++)
 {
