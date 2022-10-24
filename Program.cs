@@ -59,6 +59,7 @@ char[,] field = new char[4, 4] {                                             ///
         { ' ', ' ', ' ' , ' ' },      
         { ' ', ' ', ' ' , ' ' },
     };
+    
 void ShowField()                                                             //// Поле для крестиков и ноликов использовал string format чтобы нагляднее показывал  как будет выглядеть строка
 {
     Console.WriteLine(string.Format("  {0} | {1} | {2}", field[1, 1], field[1, 2], field[1, 3]));            
@@ -67,9 +68,10 @@ void ShowField()                                                             ///
     Console.WriteLine(" ---+---+---");
     Console.WriteLine(string.Format("  {0} | {1} | {2}", field[3, 1], field[3, 2], field[3, 3]));
 }
+
 void Coordinate(ref int x, ref int y)                                        //// координаты которые будем присуждать крестикам и ноликам
 {
-    string coordinat = Console.ReadLine();
+    string ?coordinat = Console.ReadLine();
     string[] splitString2 = coordinat.Split(' ');
     x = Convert.ToInt32(splitString2[0]);
     y = Convert.ToInt32(splitString2[1]);
