@@ -179,12 +179,12 @@ void proverka(char[,] field)
     Coordinate(ref str, ref column);
     if (str > 3 || str < 1)
     {
-        Console.WriteLine("Введите координаты нолика (1-3) строка через пробел столбец");
+        Console.WriteLine("Введите координаты (1-3) строка через пробел столбец");
         Coordinate(ref str, ref column);
     }
     if (column > 3 || column < 1)
     {
-        Console.WriteLine("Введите координаты нолика (1-3) строка через пробел столбец");
+        Console.WriteLine("Введите координаты (1-3) строка через пробел столбец");
         Coordinate(ref str, ref column);
     }
 
