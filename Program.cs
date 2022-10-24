@@ -75,10 +75,119 @@ void Coordinate(ref int x, ref int y)
     y = Convert.ToInt32(splitString2[1]);
 }
 
+int schet = 1;
+int str = 0;
+int column = 0;
+char krestik = 'x';
+char nolik = 'o';
+char result = 'n';
+
+
+for (int i = 1; i < 6; i++)
+{
+    Console.WriteLine("Введите координаты крестика строка через пробел столбец");
+    Console.WriteLine($"{schet}");
+    Console.WriteLine();
+    ShowField();
+    proverka(field);
+    field[str, column] = krestik;
+    Console.Clear();
+    pobeda(field, ref schet);
+    if (schet == 18)
+    {
+        Console.WriteLine("конец игры");
+        ShowField();
+        return;
+    }
+    Console.WriteLine("Введите координаты нолика строка через пробел столбец");
+    Console.WriteLine($"{schet}");
+    Console.WriteLine();
+    ShowField();
+    proverka(field);
+    field[str, column] = nolik;
+    Console.Clear();
+    pobeda(field, ref schet);
+    if (schet == 18)
+    {
+        Console.WriteLine("конец игры");
+        ShowField();
+        return;
+    }
+}
+
+void pobeda(char[,] field, ref int schet)
+{
+    schet++;
+    proverkaXor0(str, column, ref result);
+    if (field[1, 1] == field[1, 2] && field[1, 2] == field[1, 3] && field[1, 3] == result)
+    {
+        PobedaXor0(ref schet);
+        return;
+    }
+    else if (field[2, 1] == field[2, 2] && field[2, 2] == field[2, 3] && field[2, 3] == result)
+    {
+        PobedaXor0(ref schet);
+        return;
+    }
+
+    else if (field[3, 1] == field[3, 2] && field[3, 2] == field[3, 3] && field[3, 3] == result)
+    {
+        PobedaXor0(ref schet);
+        return;
+    }
+
+    else if (field[1, 1] == field[2, 1] && field[2, 1] == field[3, 1] && field[3, 1] == result)
+    {
+        PobedaXor0(ref schet);
+        return;
+    }
+
+    else if (field[1, 2] == field[2, 2] && field[2, 2] == field[3, 2] && field[3, 2] == result)
+    {
+        PobedaXor0(ref schet);
+        return;
+    }
+
+    else if (field[1, 3] == field[2, 3] && field[2, 3] == field[3, 3] && field[3, 3] == result)
+    {
+        PobedaXor0(ref schet);
+        return;
+    }
+
+    else if (field[1, 1] == field[2, 2] && field[2, 2] == field[3, 3] && field[3, 3] == result)
+    {
+        PobedaXor0(ref schet);
+        return;
+    }
+
+    else if (field[1, 3] == field[2, 2] && field[2, 2] == field[3, 1] && field[3, 1] == result)
+    {
+        PobedaXor0(ref schet);
+        return;
+    }
+    if (schet == 9)
+    {
+        Console.WriteLine("Ничья");
+        schet = 18;
+        return;
+    }
+}
+
 void proverka(char[,] field)
 {
     char whi = 'n';
     Coordinate(ref str, ref column);
+    if (str > 3 || str < 1)
+    {
+        Console.WriteLine("Введите координаты нолика (1-3) строка через пробел столбец");
+        Coordinate(ref str, ref column);
+    }
+    if (column > 3 || column < 1)
+    {
+        Console.WriteLine("Введите координаты нолика (1-3) строка через пробел столбец");
+        Coordinate(ref str, ref column);
+    }
+
     while (whi == 'n')
     {
         if (field[str, column] == ' ')
@@ -93,181 +202,32 @@ void proverka(char[,] field)
 
 }
 
-void pobeda(char[,] field, ref int schet)
+void proverkaXor0(int str, int column, ref char result)
 {
+    if (field[str, column] == 'x')
+    {
+        result = 'x';
+        return;
+    }
+    else if (field[str, column] == 'o')
+        result = 'o';
+    return;
+}
 
-    schet++;
-    if (field[1, 1] == field[1, 2] && field[1, 2] == field[1, 3])
+void PobedaXor0(ref int schet)
+{
+    if (result == 'x')
     {
-        if (field[1, 2] == 'x')
-        {
-            Console.WriteLine("Победили Крестики");
-            schet=18;
-            return;
-        }
-        else if(field[1, 2] == 'o')
-        {
-            Console.WriteLine("Победили Нолики");
-            schet=18;
-            return;
-        }
-    }
-    else if (field[2, 1] == field[2, 2] && field[2, 2] == field[2, 3])
-    {
-        if (field[2, 2] == 'x')
-        {
-            Console.WriteLine("Победили Крестики");
-            schet=18;
-            return;
-        }
-        else if(field[2, 2] == 'o')
-        {
-            Console.WriteLine("Победили Нолики");
-            schet=18;
-            return;
-        }
-    }
-
-    else if (field[3, 1] == field[3, 2] && field[3, 2] == field[3, 3])
-    {
-        if (field[3, 2] == 'x')
-        {
-            Console.WriteLine("Победили Крестики");
-            schet=18;
-            return;
-        }
-        else if(field[3, 2] == 'o')
-        {
-            Console.WriteLine("Победили Нолики");
-            schet=18;
-            return;
-        }
-    }
-
-    else if (field[1, 1] == field[2, 1] && field[2, 1] == field[3, 1])
-    {
-        if (field[2, 1] == 'x')
-        {
-            Console.WriteLine("Победили Крестики");
-            schet = 18;
-            return;
-        }
-        else if(field[2, 1] == 'o')
-        {
-            Console.WriteLine("Победили Нолики");
-            schet = 18;
-            return;
-        }
-    }
-
-    else if (field[1, 2] == field[2, 2] && field[2, 2] == field[3, 2])
-    {
-        if (field[2, 2] == 'x')
-        {
-            Console.WriteLine("Победили Крестики");
-            schet = 18;
-            return;
-        }
-        else if(field[2, 2] == 'o')
-        {
-            Console.WriteLine("Победили Нолики");
-            schet = 18;
-            return;
-        }
-    }
-
-    else if (field[1, 3] == field[2, 3] && field[2, 3] == field[3, 3])
-    {
-        if (field[2, 3] == 'x')
-        {
-            Console.WriteLine("Победили Крестики");
-            schet = 18;
-            return;
-        }
-        else if(field[2, 3] == 'o')
-        {
-            Console.WriteLine("Победили Нолики");
-            schet = 18;
-            return;
-        }
-    }
-
-    else if (field[1, 1] == field[2, 2] && field[2, 2] == field[3, 3])
-    {
-        if (field[2, 2] == 'x')
-        {
-            Console.WriteLine("Победили Крестики");
-            schet = 18;
-            return;
-        }
-        else if(field[2, 2] == 'o')
-        {
-            Console.WriteLine("Победили Нолики");
-            schet = 18;
-            return;
-        }
-    }
-
-    else if (field[1, 3] == field[2, 2] && field[2, 2] == field[3, 1])
-    {
-        if (field[2, 2] == 'x')
-        {
-            Console.WriteLine("Победили Крестики");
-            schet = 18;
-            return;
-        }
-        else if(field[2, 2] == 'o')
-        {
-            Console.WriteLine("Победили Нолики");
-            schet = 18;
-            return;
-        }
-    }
-    if (schet == 17)
-    {
-        Console.WriteLine("Ничья");
+        Console.WriteLine("Победили крестики");
         schet = 18;
-        return;
     }
-
-}
-
-int schet = 1;
-int str = 0;
-int column = 0;
-char krestik = 'x';
-char nolik = 'o';
-
-for (int i = 1; i < 9; i++)
-{
-    Console.WriteLine("Введите координаты крестика строка через пробел столбец");
-    Console.WriteLine();
-    ShowField();
-    proverka(field);
-    field[str, column] = krestik;
-    Console.Clear();
-    pobeda(field, ref schet);
-    if (schet == 18)
+    else if (result == 'o')
     {
-        Console.WriteLine("конец игры");
-        return;
-
+        Console.WriteLine("Победили Нолики");
+        schet = 18;
     }
-    Console.WriteLine("Введите координаты нолика строка через пробел столбец");
-    Console.WriteLine();
-    ShowField();
-    proverka(field);
-    field[str, column] = nolik;
-    Console.Clear();
-    pobeda(field, ref schet);
-    if (schet == 18)
-    {
-        Console.WriteLine("конец игры");
-        return;
-
-    }
+    return;
 }
-
 
 /////////////////////////////////////////////
 // В консоль вводятся два числа. В обоих числах есть одна общая цифра. 
