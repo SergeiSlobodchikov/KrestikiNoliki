@@ -53,24 +53,24 @@
 
 /////////////////////////////////////
 ///////////////////////////////////////
-char[,] field = new char[4, 4] {
+char[,] field = new char[4, 4] {                                             //// Массив сделал 4 на 4 чтобы использовать строки и столбцы 1-3
         { ' ', ' ', ' ' , ' ' },
-        { ' ', ' ', ' ' , ' ' },
-        { ' ', ' ', ' ' , ' ' },
+        { ' ', ' ', ' ' , ' ' },                  
+        { ' ', ' ', ' ' , ' ' },      
         { ' ', ' ', ' ' , ' ' },
     };
-void ShowField()
+void ShowField()                                                             //// Поле для крестиков и ноликов использовал string format чтобы нагляднее показывал  как будет выглядеть строка
 {
-    Console.WriteLine(string.Format("  {0} | {1} | {2}", field[1, 1], field[1, 2], field[1, 3]));
+    Console.WriteLine(string.Format("  {0} | {1} | {2}", field[1, 1], field[1, 2], field[1, 3]));            
     Console.WriteLine(" ---+---+---");
     Console.WriteLine(string.Format("  {0} | {1} | {2}", field[2, 1], field[2, 2], field[2, 3]));
     Console.WriteLine(" ---+---+---");
     Console.WriteLine(string.Format("  {0} | {1} | {2}", field[3, 1], field[3, 2], field[3, 3]));
 }
-void Coordinate(ref int x, ref int y)
+void Coordinate(ref int x, ref int y)                                        //// координаты которые будем присуждать крестикам и ноликам
 {
-    string t2 = Console.ReadLine();
-    string[] splitString2 = t2.Split(' ');
+    string coordinat = Console.ReadLine();
+    string[] splitString2 = coordinat.Split(' ');
     x = Convert.ToInt32(splitString2[0]);
     y = Convert.ToInt32(splitString2[1]);
 }
@@ -83,7 +83,7 @@ char nolik = 'o';
 char result = 'n';
 
 
-for (int i = 1; i < 6; i++)
+for (int i = 1; i < 6; i++)                                                 //// Главное тело игры
 {
     Console.WriteLine("Введите координаты крестика строка через пробел столбец");
     Console.WriteLine($"{schet}");
@@ -115,7 +115,7 @@ for (int i = 1; i < 6; i++)
     }
 }
 
-void pobeda(char[,] field, ref int schet)
+void pobeda(char[,] field, ref int schet)                                   //// Проверка на победу или ничью
 {
     schet++;
     proverkaXor0(str, column, ref result);
@@ -173,7 +173,7 @@ void pobeda(char[,] field, ref int schet)
     }
 }
 
-void proverka(char[,] field)
+void proverka(char[,] field)                                                //// Проверка пустая клеточка или занята
 {
     char whi = 'n';
     Coordinate(ref str, ref column);
@@ -202,7 +202,7 @@ void proverka(char[,] field)
 
 }
 
-void proverkaXor0(int str, int column, ref char result)
+void proverkaXor0(int str, int column, ref char result)                     //// Проверка что введено на клетке 'x' или 'o'
 {
     if (field[str, column] == 'x')
     {
@@ -214,7 +214,7 @@ void proverkaXor0(int str, int column, ref char result)
     return;
 }
 
-void PobedaXor0(ref int schet)
+void PobedaXor0(ref int schet)                                            //// Проверка кто победитель
 {
     if (result == 'x')
     {
