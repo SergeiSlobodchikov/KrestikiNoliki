@@ -151,6 +151,12 @@ void x(ref int schet, ref char[,] field)
             schet = 10;
             return;
         }
+        else
+        {
+            Console.WriteLine("Ничья");
+            schet = 10;
+            return;
+        }
     }
 }
 
