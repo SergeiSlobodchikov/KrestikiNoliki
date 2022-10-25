@@ -61,7 +61,8 @@ char[,] field = new char[4, 4] {                                             ///
     };
 
 void ShowField()                                                             //// Поле для крестиков и ноликов использовал string format чтобы нагляднее показывал  как будет выглядеть строка
-{   Console.WriteLine();
+{
+    Console.WriteLine();
     Console.WriteLine(string.Format("  {0} | {1} | {2}", field[1, 1], field[1, 2], field[1, 3]));
     Console.WriteLine(" ---+---+---");
     Console.WriteLine(string.Format("  {0} | {1} | {2}", field[2, 1], field[2, 2], field[2, 3]));
@@ -115,22 +116,48 @@ for (int i = 1; i < 6; i++)                                                 ////
 
 void pobeda(char[,] field, ref int schet)                                   //// Проверка на победу или ничью
 {
+
     schet++;
-    win =     (field[1, 1] !=' ' && field[1, 1] == field[1, 2] && field[1, 2] == field[1, 3] ||
-               field[2, 1] !=' ' && field[2, 1] == field[2, 2] && field[2, 2] == field[2, 3] ||
-               field[3, 1] !=' ' && field[3, 1] == field[3, 2] && field[3, 2] == field[3, 3] ||
-               field[1, 1] !=' ' && field[1, 1] == field[2, 1] && field[2, 1] == field[3, 1] ||
-               field[1, 2] !=' ' && field[1, 2] == field[2, 2] && field[2, 2] == field[3, 2] ||
-               field[1, 3] !=' ' && field[1, 3] == field[2, 3] && field[2, 3] == field[3, 3] ||
-               field[1, 1] !=' ' && field[1, 1] == field[2, 2] && field[2, 2] == field[3, 3] ||
-               field[1, 3] !=' ' && field[1, 3] == field[2, 2] && field[2, 2] == field[3, 1] );
-    if (win==true)
+    if (schet == 9)
     {
-        Console.WriteLine( field[str,column]=='x' ? "Победили крестики" : "Победили Нолики");
-        schet = 10;
-        return;
+
+        for (int i = 1; i < 4; i++)
+        {
+            for (int j = 1; j < 4; j++)
+            {
+                if (field[i, j] == ' ')
+                {
+                    field[i, j] = 'x';
+                    schet = 10;
+                }
+            }
+
+        }
+
     }
-    else if(schet == 10)
+    win = (field[1, 1] != ' ' && field[1, 1] == field[1, 2] && field[1, 2] == field[1, 3] ||
+               field[2, 1] != ' ' && field[2, 1] == field[2, 2] && field[2, 2] == field[2, 3] ||
+               field[3, 1] != ' ' && field[3, 1] == field[3, 2] && field[3, 2] == field[3, 3] ||
+               field[1, 1] != ' ' && field[1, 1] == field[2, 1] && field[2, 1] == field[3, 1] ||
+               field[1, 2] != ' ' && field[1, 2] == field[2, 2] && field[2, 2] == field[3, 2] ||
+               field[1, 3] != ' ' && field[1, 3] == field[2, 3] && field[2, 3] == field[3, 3] ||
+               field[1, 1] != ' ' && field[1, 1] == field[2, 2] && field[2, 2] == field[3, 3] ||
+               field[1, 3] != ' ' && field[1, 3] == field[2, 2] && field[2, 2] == field[3, 1]);
+
+    if (win == true)
+    {
+        if (schet == 10)
+        {
+            Console.WriteLine("Победили крестики");
+            return;
+        }
+        else
+        {
+            Console.WriteLine(field[str, column] == 'x' ? "Победили крестики" : "Победили Нолики");
+            return;
+        }
+    }
+    else if (schet == 10)
     {
         Console.WriteLine("Ничья");
         return;
